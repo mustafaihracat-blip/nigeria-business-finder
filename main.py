@@ -1,7 +1,7 @@
-import argparse
+ import argparse
 import logging
 import sys
-import os
+import os 
 import pandas as pd
 
 # ── 1. Proje kök dizinini Python path'e ekle ──────────────────────────────────
@@ -33,12 +33,15 @@ from data.nigeria_regions import NIGERIA_REGIONS
 
 # --- ARAYÜZ İÇİN GEREKLİ FONKSİYON (Streamlit burayı çağıracak) ---
 def find_nigeria_businesses(product, max_cities=2):
-    """Streamlit arayüzü için basitleştirilmiş çalıştırma fonksiyonu"""
+    """Streamlit arayüzü için tam uyumlu çalıştırma fonksiyonu"""
+    # Finder'ı kurarken sadece ürün grubunu ve kazıma ayarını veriyoruz
     finder = NigeriaBusinessFinder(
         product_group=product,
-        regions=None, # Tüm bölgeler
+        regions=None, 
         scrape_details=True,
     )
+    
+    # Şehir sayısını (max_cities) tam burada, run aşamasında gönderiyoruz
     df = finder.run(max_cities=max_cities)
     
     if not df.empty:
